@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+    
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+<!-- component -->
+<form method="post">
+<div class="min-h-screen flex justify-center items-center bg-white">
+  <div class="p-10 bg-sky-900	 border-[1px] -mt-10 border-slate-200 rounded-md  flex flex-col items-center space-y-3">
+    <div class="py-8">
+      <img width="350" class="-mt-10" src="/image/cropped-logo-gefor-slogan-education-2 (1).png" />
+    </div>
+    <div class="flex flex-col space-y-1">
+            <input type="email" class="p-3 border-[1px] border-slate-500 rounded-sm w-80" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="E-Mail" placeholder="Password" required autofocus>
+<input class="p-3 border-[1px] border-slate-500 rounded-sm w-80"  type="password" name="password" id="inputPassword" class="form-control"  autocomplete="current-password" placeholder="Password" required>
+    </div>
+    <div class="flex flex-col space-y-5 w-full">
+      <button class="w-full bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Log in</button>
+      <div class="flex items-center justify-center border-t-[1px] border-t-orange-600 w-full relative">
+      </div>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}">
+    
+  </div>
+  </form>
+
+  
+
+{% endblock %}
