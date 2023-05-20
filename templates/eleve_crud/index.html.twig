@@ -4,47 +4,30 @@
 {% endblock %}
 
 {% block body %}
-	<div class="w-full h-screen flex">
-		<div
-			class="w-1/3 bg-sky-900 h-screen overflow-y-auto">
-			<!-- Barre latérale -->
-			<div class="py-8">
-				<img width="350" class="-mt-10" src="/image/cropped-logo-gefor-slogan-education-2 (1).png"/>
-			</div>
-
-			<img src="{{ asset('uploads/photos/' ~ app.user.photo) }}" class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="Profile Picture">
-			<p>{{ app.user.name }}</p>
-			<p>{{ app.user.firstname }}</p>
-			{% if is_granted('ROLE_ADMIN') %}
+	
+        {% if is_granted('ROLE_ADMIN') %}
 				<a href="{{ path('app_eleve_crud_new') }}" class="block mt-4 text-blue-500 hover:text-blue-700">Create new</a>
 			{% endif %}
-			<!-- Ajoutez plus d'informations ici si nécessaire -->
-		</div>
 
-		<div class="w-full p-6 overflow-y-auto space-y-20">
+		<div class="w-full p-6 overflow-y-auto space-y-10">
 			<h1 class="text-2xl font-bold mb-4">Liste des Eleves</h1>
 
 			<div class="flex flex-wrap gap-30 justify-between" style="margin-right: 20px; height: 200px;">
 				{% for eleve in eleves %}
 					{% if eleve != app.user %}
-						<div class="w-30 h-30 bg-white rounded-lg shadow-md p-4 mb-6">
+						<div class="bg-white w-30 h-30 rounded-lg shadow-md p-4 mb-6">
 							<div class="flex items-center mb-4"></div>
-							<div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20">
-								<div class="flex justify-center md:justify-end -mt-16">
-									<img src="{{ asset('uploads/photos/' ~ eleve.photo) }}" class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="Profile Picture">
+
+
+							<img src="{{ asset('uploads/photos/' ~ eleve.photo) }}" class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500 " alt="Profile Picture">
+
+							<div class="flex items-center mb-4">
+								<div class="ml-4">
+									<h1 class="text-xl font-bold">{{ eleve.name }}</h1>
+									<h1 class="text-xl font-bold">{{ eleve.firstname }}</h1>
+									<p class="text-gray-500">{{ eleve.formation }}</p>
 								</div>
 							</div>
-
-							<div class="w-1/3 bg-white rounded-lg shadow-md p-4 mb-6 mx-4">
-								<div class="flex items-center mb-4">
-									<div class="ml-4">
-										<h1 class="text-xl font-bold">{{ eleve.name }}</h1>
-										<h1 class="text-xl font-bold">{{ eleve.firstname }}</h1>
-										<p class="text-gray-500">{{ eleve.formation }}</p>
-									</div>
-								</div>
-							</div>
-
 							{% if is_granted('ROLE_ADMIN') %}
 								<div class="flex justify-center mt-4">
 									<a href="{{ path('app_eleve_crud_edit', {'id': eleve.id}) }}" class="bg-blue-500 text-white px-4 py-2 rounded inline-block text-center ml-2">Edit</a>
@@ -55,6 +38,7 @@
 								<a href="{{ path('app_eleve_crud_show', {'id': eleve.id}) }}" class="bg-blue-500 text-white px-4 py-2 rounded inline-block text-center">Show</a>
 							</div>
 						</div>
+                        
 					{% endif %}
 				{% else %}
 					<p class="text-center">No records found</p>
