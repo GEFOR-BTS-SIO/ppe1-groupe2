@@ -3,11 +3,23 @@
 {% block title %}Edit Eleve{% endblock %}
 
 {% block body %}
-    <h1>Edit Eleve</h1>
+    
 
-    {{ include('eleve_crud/_form.html.twig', {'button_label': 'Update'}) }}
+   
 
-    <a href="{{ path('app_eleve_crud_index') }}">back to list</a>
+   
 
-    {{ include('eleve_crud/_delete_form.html.twig') }}
+    
+    <div class="flex justify-center items-center h-screen">
+    <div class="w-96 bg-sky-900 border border-blue-300 rounded-lg p-6">
+        <h1 class="text-2xl mb-6 text-white">Edit Eleve</h1>
+        <form>
+            <!-- Les champs du formulaire ici -->
+            {{ include('eleve_crud/_form.html.twig', {'button_label': 'Update'}) }}
+        </form>
+        <a href="{{ path('app_eleve_crud_index') }}">back to list</a>
+        {{ include('eleve_crud/_delete_form.html.twig') }}
+    </div>
+</div>
+
 {% endblock %}

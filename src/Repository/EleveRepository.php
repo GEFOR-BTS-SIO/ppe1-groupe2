@@ -56,20 +56,20 @@ class EleveRepository extends ServiceEntityRepository implements PasswordUpgrade
         $this->save($user, true);
     }
 
-//    /**
-//     * @return Eleve[] Returns an array of Eleve objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+   */
+    public function search($searchTerm)
+    {
+        $qb = $this->createQueryBuilder('b')
+        ->where('b.name LIKE :searchTerm')
+        ->orWhere('b.firstname LIKE :searchTerm')
+        ->orWhere('b.formation LIKE :searchTerm')
+        ->setParameter('searchTerm', '%'.$searchTerm.'%')
+        ->getQuery();
+
+    return $qb->execute();
+            
+    }
 
 //    public function findOneBySomeField($value): ?Eleve
 //    {

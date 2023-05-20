@@ -15,7 +15,11 @@ class EleveType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', null, [
+                'attr' => [
+                    'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                ],
+            ])
             ->add('roles', ChoiceType::class, [
                 'choices'  => [
                     'User' => 'ROLE_USER',
@@ -23,20 +27,37 @@ class EleveType extends AbstractType
                 ],
                 'multiple' => true,
                 'expanded' => true,
+                'attr' => [
+                    'class' => 'text-blue-600',
+                ],
             ])
-            ->add('password')
-            ->add('name')
-            ->add('firstname')
-            ->add('formation')
+            ->add('password', null, [
+                'attr' => [
+                    'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                ],
+            ])
+            ->add('name', null, [
+                'attr' => [
+                    'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                ],
+            ])
+            ->add('firstname', null, [
+                'attr' => [
+                    'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                ],
+            ])
+            ->add('formation', null, [
+                'attr' => [
+                    'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                ],
+            ])
             ->add('photo', FileType::class, [
                 'label' => 'Image de profil (jpeg or png)',
-                // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
                 'required' => false,
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
+                'attr' => [
+                    'class' => 'text-blue-600',
+                ],
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -47,10 +68,7 @@ class EleveType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid image file',
                     ])
                 ],
-            ])
-            
-            
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

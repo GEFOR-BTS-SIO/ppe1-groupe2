@@ -27,6 +27,7 @@ class Eleve implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
@@ -103,9 +104,9 @@ class Eleve implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword($hashedPassword)
     {
-        $this->password = $password;
+        $this->password = $hashedPassword;
 
         return $this;
     }
