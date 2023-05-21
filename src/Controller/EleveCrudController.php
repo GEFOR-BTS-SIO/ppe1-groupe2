@@ -78,22 +78,23 @@ class EleveCrudController extends AbstractController
     }
 
     #[Route('/search', name: 'app_eleve_search', methods: ['GET'])]
-public function search(Request $request, EleveRepository $eleveRepository): Response
-{
-    $searchTerm = $request->query->get('e');
-    $eleves = $eleveRepository->search($searchTerm);
-
-    $message = '';
-    if (empty($eleves)) {
-        $message = "Aucun élève trouvé pour la recherche : '$searchTerm'";
+    public function search(Request $request, EleveRepository $eleveRepository): Response
+    {
+        $searchTerm = $request->query->get('e');
+        $eleves = $eleveRepository->search($searchTerm);
+    
+        $message = '';
+        if (empty($eleves)) {
+            $message = "Aucun élève trouvé pour la recherche : '$searchTerm'";
+        }
+    
+        return $this->render('eleve_crud/index.html.twig', [
+            'eleves' => $eleves,
+            'searchTerm' => $searchTerm,
+            'message' => $message,
+        ]);
     }
-
-    return $this->render('eleve_crud/index.html.twig', [
-        'eleves' => $eleves,
-        'searchTerm' => $searchTerm,
-        'message' => $message,
-    ]);
-}
+    
     
 
     #[Route('/{id}', name: 'app_eleve_crud_show', methods: ['GET'])]
