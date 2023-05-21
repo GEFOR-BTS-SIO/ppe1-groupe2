@@ -8,18 +8,27 @@
    
 
    
-
-    
-    <div class="flex justify-center items-center h-screen">
+<div class="flex justify-center items-center h-screen">
     <div class="w-96 bg-sky-900 border border-blue-300 rounded-lg p-6">
         <h1 class="text-2xl mb-6 text-white">Edit Eleve</h1>
         <form>
             <!-- Les champs du formulaire ici -->
             {{ include('eleve_crud/_form.html.twig', {'button_label': 'Update'}) }}
         </form>
-        <a href="{{ path('app_eleve_crud_index') }}">back to list</a>
-        {{ include('eleve_crud/_delete_form.html.twig') }}
+        
     </div>
+    
+    <div class="mt-6 flex flex-col items-center">
+        <a href="{{ path('app_eleve_crud_index') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 hover:underline">Retour à la liste</a>
+        <a href="{{ path('app_mon_profil') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 hover:underline">Retour au profil</a>
+            {{ include('eleve_crud/_delete_form.html.twig') }}
+    
+    </div>
+
+
+    
 </div>
+
+
 
 {% endblock %}

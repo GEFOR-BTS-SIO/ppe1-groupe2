@@ -7,18 +7,18 @@
 				<button type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
 					<span class="sr-only">Open main menu</span>
 					<!--
-										            Icon when menu is closed.
-										
-										            Menu open: "hidden", Menu closed: "block"
-										          -->
+															            Icon when menu is closed.
+															
+															            Menu open: "hidden", Menu closed: "block"
+															          -->
 					<svg class="block h-6 w-6" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
 					</svg>
 					<!--
-										            Icon when menu is open.
-										
-										            Menu open: "block", Menu closed: "hidden"
-										          -->
+															            Icon when menu is open.
+															
+															            Menu open: "block", Menu closed: "hidden"
+															          -->
 					<svg class="hidden h-6 w-6" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
 					</svg>
@@ -33,13 +33,14 @@
 						<div
 							class="flex space-x-4">
 							<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-							<a href="/eleve/crud/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Mon Profil</a>
+							<a href="/mon/profil/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Mon Profil</a>
 							<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Les formations</a>
-              
+
 							{% if is_granted('ROLE_ADMIN') %}
 								<a href="{{ path('app_eleve_crud_new') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Crée un utilisateur</a>
 							{% endif %}
-<a href="/logout" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Déconnexion</a>
+							<a href="/logout" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Déconnexion</a>
+              
 
 
 						</div>
@@ -48,44 +49,40 @@
 				<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 					<div class="relative ml-3">
 						<div>
-            
+
 
 							<img src="{{ asset('uploads/photos/' ~ app.user.photo) }}" class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="Profile Picture">
-					
-					{% else %}
+
+						{% else %}
 							<a href="/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Page d'acceuil</a>
-							<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Les formations</a>
-							<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Les formations</a>
+							<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Pourquoi un trombinoscope ?</a>
+							<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
 
-							<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Les formations</a>
-						{% endif %}
+						</div>
+						<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Se connecter</a>
 					</div>
-
-					<!--
-										            Dropdown menu, show/hide based on menu state.
-										
-										            Entering: "transition ease-out duration-100"
-										              From: "transform opacity-0 scale-95"
-										              To: "transform opacity-100 scale-100"
-										            Leaving: "transition ease-in duration-75"
-										              From: "transform opacity-100 scale-100"
-										              To: "transform opacity-0 scale-95"
-										          -->
-
-				</div>
+				{% endif %}
 			</div>
-		</div>
-	</div>
 
-	<!-- Mobile menu, show/hide based on menu state. -->
-	<div class="sm:hidden" id="mobile-menu">
-		<div
-			class="space-y-1 px-2 pb-3 pt-2">
-			<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-			<a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
-			<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
-			<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-			<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+			<!--
+													            Dropdown menu, show/hide based on menu state.
+													
+													            Entering: "transition ease-out duration-100"
+													              From: "transform opacity-0 scale-95"
+													              To: "transform opacity-100 scale-100"
+													            Leaving: "transition ease-in duration-75"
+													              From: "transform opacity-100 scale-100"
+													              To: "transform opacity-0 scale-95"
+													          -->
+
 		</div>
 	</div>
-</nav>
+</div></div><!-- Mobile menu, show/hide based on menu state. --><div class="sm:hidden" id="mobile-menu">
+<div
+	class="space-y-1 px-2 pb-3 pt-2">
+	<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+	<a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
+	<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
+	<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
+	<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+</div></div></nav>
