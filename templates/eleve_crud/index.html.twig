@@ -28,12 +28,12 @@
 							</div>
 							{% if is_granted('ROLE_ADMIN') %}
 								<div class="flex justify-center mt-4">
-									<a href="{{ path('app_eleve_crud_edit', {'id': eleve.id}) }}" class="bg-blue-500 text-white px-4 py-2 rounded inline-block text-center ml-2">Edit</a>
+									<a href="{{ path('app_eleve_crud_edit', {'id': eleve.id}) }}" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Edit</a>
 								</div>
 							{% endif %}
 
 							<div class="flex justify-center mt-4">
-								<a href="{{ path('app_eleve_crud_show', {'id': eleve.id}) }}" class="bg-blue-500 text-white px-4 py-2 rounded inline-block text-center">Show</a>
+								<a href="{{ path('app_eleve_crud_show', {'id': eleve.id}) }}" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Show</a>
 							</div>
 						</div>
                         
