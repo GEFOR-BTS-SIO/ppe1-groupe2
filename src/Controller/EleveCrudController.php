@@ -19,9 +19,9 @@ class EleveCrudController extends AbstractController
 {
 
     private function hashPassword($plainPassword)
-{
-    return password_hash($plainPassword, PASSWORD_BCRYPT);
-}
+    {
+        return password_hash($plainPassword, PASSWORD_BCRYPT);
+    }
 
     #[Route('/', name: 'app_eleve_crud_index', methods: ['GET'])]
     public function index(EleveRepository $eleveRepository): Response
@@ -36,9 +36,9 @@ class EleveCrudController extends AbstractController
     public function new(Request $request,SluggerInterface $slugger, EleveRepository $eleveRepository): Response
     {
         // Vérifiez le rôle de l'utilisateur
-    if (!$this->isGranted('ROLE_ADMIN')) {
-        throw new AccessDeniedException('Accès interdit');
-    }
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('Accès interdit');
+        }
         $eleve = new Eleve();
         $form = $this->createForm(EleveType::class, $eleve);
         $form->handleRequest($request);
@@ -111,26 +111,20 @@ class EleveCrudController extends AbstractController
     {
         $form = $this->createForm(EleveType::class, $eleve);
         $form->handleRequest($request);
-
+            dump($form);
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            
-if ($form->isSubmitted() && $form->isValid()) {
-    // Récupérer le mot de passe saisi
-    $plainPassword = $form->get('password')->getData();
+            // Récupérer le mot de passe saisi
+            $plainPassword = $form->get('password')->getData();
 
-    // Vérifier si un nouveau mot de passe a été saisi
-    if (!empty($plainPassword)) {
-        // Hacher le mot de passe
-        $hashedPassword = $this->hashPassword($plainPassword);
+            // Vérifier si un nouveau mot de passe a été saisi
+            if (!empty($plainPassword)) {
+                // Hacher le mot de passe
+                $hashedPassword = $this->hashPassword($plainPassword);
 
-        // Définir le mot de passe haché dans l'entité Eleve
-        $eleve->setPassword($hashedPassword);
-    }
-}
-        
-            
-            
+                // Définir le mot de passe haché dans l'entité Eleve
+                $eleve->setPassword($hashedPassword);
+            }
+
             $photo = $form->get('photo')->getData();
             if ($photo) {
                 $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
@@ -152,7 +146,7 @@ if ($form->isSubmitted() && $form->isValid()) {
             }
             $eleveRepository->save($eleve, true);
 
-            return $this->redirectToRoute('app_eleve_crud_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_eleve_crud_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('eleve_crud/edit.html.twig', [
