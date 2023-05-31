@@ -16,21 +16,21 @@ class PageDacController extends AbstractController
         ]);
     }
 
-    // #[Route('/pourquoi', name: 'app_page_pourquoi')]
-    // public function Pourquoi(): Response
-    // {
-    //     return $this->render('page_dac/Pourquoi.html.twig', [
-    //         'controller_name' => 'PageDacController',
-    //     ]);
-    // }
+    #[Route('/pourquoi', name: 'app_page_pourquoi')]
+    public function Pourquoi(): Response
+    {
+        return $this->render('page_dac/Pourquoi.html.twig', [
+            'controller_name' => 'PageDacController',
+        ]);
+    }
 
-    // #[Route('/contact', name: 'app_page_contact')]
-    // public function contact(): Response
-    // {
-    //     return $this->render('page_dac/contact.html.twig', [
-    //         'controller_name' => 'PageDacController',
-    //     ]);
-    // }
+    #[Route('/contact', name: 'app_page_contact')]
+    public function contact(): Response
+    {
+        return $this->render('page_dac/contact.html.twig', [
+            'controller_name' => 'PageDacController',
+        ]);
+    }
 
 
 

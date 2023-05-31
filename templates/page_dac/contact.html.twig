@@ -1,4 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PageDacController!
+{% block title %}Nous Contacter
+{% endblock %}
+
+{% block body %}
+
+
+<div class="flex justify-center items-center h-screen bg-white">
+  <div class="w-full max-w-2xl">
+  <p>Nous contacter</p>
+    <form class="bg-white rounded px-8 pt-6 pb-8 mb-4 shadow-orange">
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="nom">Nom :</label>
+      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nom" type="text" placeholder="Votre nom">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="prenom">Prénom :</label>
+      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="prenom" type="text" placeholder="Votre prénom">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="message">Message :</label>
+      <textarea class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" rows="5" placeholder="Votre message"></textarea>
+    </div>
+    <div class="flex items-center justify-center">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Envoyer</button>
+    </div>
+  </form>
+</div>
+
+   
+</div>
+
+
+
+
+
+
+
+
 {% endblock %}

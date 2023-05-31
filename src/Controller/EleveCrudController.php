@@ -80,6 +80,9 @@ class EleveCrudController extends AbstractController
     #[Route('/search', name: 'app_eleve_search', methods: ['GET'])]
     public function search(Request $request, EleveRepository $eleveRepository): Response
     {
+        if (!$this->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException('Accès interdit');
+        }
         $searchTerm = $request->query->get('e');
         $eleves = $eleveRepository->search($searchTerm);
     
@@ -109,9 +112,13 @@ class EleveCrudController extends AbstractController
     #[Route('/{id}/edit', name: 'app_eleve_crud_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request,SluggerInterface $slugger, Eleve $eleve, EleveRepository $eleveRepository): Response
     {
+
+        if (!$this->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException('Accès interdit');
+        }
         $form = $this->createForm(EleveType::class, $eleve);
         $form->handleRequest($request);
-            dump($form);
+            
         if ($form->isSubmitted() && $form->isValid()) {
             // Récupérer le mot de passe saisi
             $plainPassword = $form->get('password')->getData();
@@ -160,6 +167,9 @@ class EleveCrudController extends AbstractController
     #[Route('/{id}', name: 'app_eleve_crud_delete', methods: ['POST'])]
     public function delete(Request $request, Eleve $eleve, EleveRepository $eleveRepository): Response
     {
+        if (!$this->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException('Accès interdit');
+        }
         if ($this->isCsrfTokenValid('delete'.$eleve->getId(), $request->request->get('_token'))) {
             $eleveRepository->remove($eleve, true);
         }
