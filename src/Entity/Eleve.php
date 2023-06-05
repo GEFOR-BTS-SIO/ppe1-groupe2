@@ -36,19 +36,15 @@ class Eleve implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $formation = null;
-
-    #[ORM\OneToMany(mappedBy: 'Formation', targetEntity: Formation::class)]
-    private Collection $formations;
+    
 
     #[ORM\Column(length: 255)]
     private ?string $photo = null;
 
-    public function __construct()
-    {
-        $this->formations = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'eleves')]
+    private ?Formation $idCursus = null;
+
+   
 
     public function getId(): ?int
     {
@@ -144,47 +140,13 @@ class Eleve implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFormation(): ?string
-    {
-        return $this->formation;
-    }
+   
 
-    public function setFormation(string $formation): self
-    {
-        $this->formation = $formation;
+    
 
-        return $this;
-    }
 
-    /**
-     * @return Collection<int, Formation>
-     */
-    public function getFormations(): Collection
-    {
-        return $this->formations;
-    }
 
-    public function addFormation(Formation $formation): self
-    {
-        if (!$this->formations->contains($formation)) {
-            $this->formations->add($formation);
-            $formation->setFormation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFormation(Formation $formation): self
-    {
-        if ($this->formations->removeElement($formation)) {
-            // set the owning side to null (unless already changed)
-            if ($formation->getFormation() === $this) {
-                $formation->setFormation(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     public function getPhoto(): ?string
     {
@@ -194,6 +156,18 @@ class Eleve implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getIdCursus(): ?Formation
+    {
+        return $this->idCursus;
+    }
+
+    public function setIdCursus(?Formation $idCursus): self
+    {
+        $this->idCursus = $idCursus;
 
         return $this;
     }

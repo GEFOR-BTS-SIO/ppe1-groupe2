@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Eleve;
+use App\Entity\Formation;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -48,11 +50,14 @@ class EleveType extends AbstractType
                     'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 ],
             ])
-            ->add('formation', null, [
+            ->add('idCursus', EntityType::class, [
+                'class' => Formation::class,
+                'choice_label' => 'cursus',
                 'attr' => [
                     'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 ],
             ])
+            
             ->add('photo', FileType::class, [
                 'label' => 'Image de profil (jpeg or png)',
                 'mapped' => false,

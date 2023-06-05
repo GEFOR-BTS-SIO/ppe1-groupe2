@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FormationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
@@ -13,52 +15,75 @@ class Formation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'formations')]
-    private ?Eleve $Formation = null;
-
     #[ORM\Column(length: 255)]
-    private ?string $SIO = null;
+    private ?string $cursus = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Banque = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $annee = null;
+
+    #[ORM\OneToMany(mappedBy: 'idCursus', targetEntity: Eleve::class)]
+    private Collection $eleves;
+
+    public function __construct()
+    {
+        $this->eleves = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFormation(): ?Eleve
+    public function getCursus(): ?string
     {
-        return $this->Formation;
+        return $this->cursus;
     }
 
-    public function setFormation(?Eleve $Formation): self
+    public function setCursus(string $cursus): self
     {
-        $this->Formation = $Formation;
+        $this->cursus = $cursus;
 
         return $this;
     }
 
-    public function getSIO(): ?string
+    public function getAnnee(): ?int
     {
-        return $this->SIO;
+        return $this->annee;
     }
 
-    public function setSIO(string $SIO): self
+    public function setAnnee(?int $annee): self
     {
-        $this->SIO = $SIO;
+        $this->annee = $annee;
 
         return $this;
     }
 
-    public function getBanque(): ?string
+    /**
+     * @return Collection<int, Eleve>
+     */
+    public function getEleves(): Collection
     {
-        return $this->Banque;
+        return $this->eleves;
     }
 
-    public function setBanque(string $Banque): self
+    public function addElefe(Eleve $elefe): self
     {
-        $this->Banque = $Banque;
+        if (!$this->eleves->contains($elefe)) {
+            $this->eleves->add($elefe);
+            $elefe->setIdCursus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElefe(Eleve $elefe): self
+    {
+        if ($this->eleves->removeElement($elefe)) {
+            // set the owning side to null (unless already changed)
+            if ($elefe->getIdCursus() === $this) {
+                $elefe->setIdCursus(null);
+            }
+        }
 
         return $this;
     }
