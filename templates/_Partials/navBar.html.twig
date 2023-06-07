@@ -34,7 +34,7 @@
 							class="flex space-x-4">
 							<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 							<a href="/mon/profil/" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]" aria-current="page">Mon Profil</a>
-							<a href="/formation" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Les formations</a>
+							<a href="/LesFormation" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Les formations</a>
 
 							{% if is_granted('ROLE_ADMIN') %}
 								<a href="{{ path('app_eleve_crud_new') }}" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Crée un utilisateur</a>

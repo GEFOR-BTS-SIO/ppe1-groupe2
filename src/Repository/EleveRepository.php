@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Eleve;
+use App\Entity\Formation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -68,6 +69,25 @@ class EleveRepository extends ServiceEntityRepository implements PasswordUpgrade
 
     return $qb->execute();
             
+    }
+
+    public function findByRole(string $role, string $name = null, Formation $formation = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+        if(!empty($name)){
+            $queryBuilder->where('u.name LIKE :name')
+                ->orWhere('u.firstname LIKE :name')
+                ->setParameter('name', '%'.$name.'%');
+        }
+        if(!empty($formation)){
+            $queryBuilder->andWhere('u.idCursus = :formation')
+                ->setParameter('formation', $formation->getId());
+        }
+        
+        return $queryBuilder
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 //    public function findOneBySomeField($value): ?Eleve

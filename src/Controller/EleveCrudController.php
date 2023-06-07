@@ -94,7 +94,7 @@ class EleveCrudController extends AbstractController
         if (!$this->isGranted('ROLE_USER')) {
             throw new AccessDeniedException('Accès interdit');
         }
-        $searchTerm = $request->query->get('b');
+        $searchTerm = $request->query->get('e');
         $eleves = $eleveRepository->search($searchTerm);
     
         $message = '';

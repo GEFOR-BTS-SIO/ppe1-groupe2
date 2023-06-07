@@ -3,38 +3,25 @@
 {% block title %}Hello LesFormationController!{% endblock %}
 
 {% block body %}
-<div>
-
-{% for eleve in eleves %}
-					{% if eleve != app.user %}
-						<div class="bg-white w-30 h-30 rounded-lg shadow-md p-4 mb-6">
-							<div class="flex items-center mb-4"></div>
-
-
-							<img src="{{ asset('uploads/photos/' ~ eleve.photo) }}" class="w-10 h-10 object-cover rounded-full border-2 border-indigo-500 " alt="Profile Picture">
-
-							<div class="flex items-center mb-4">
-								<div class="ml-4">
-									<h1 class="text-xl font-bold">{{ eleve.name }}</h1>
-									<h1 class="text-xl font-bold">{{ eleve.firstname }}</h1>
-									
-								</div>
-							</div>
-							{% if is_granted('ROLE_ADMIN') %}
-								<div class="flex justify-center mt-4">
-									<a href="{{ path('app_eleve_crud_edit', {'id': eleve.id}) }}" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Edit</a>
-								</div>
-							{% endif %}
-
-							<div class="flex justify-center mt-4">
-								<a href="{{ path('app_eleve_crud_show', {'id': eleve.id}) }}" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Show</a>
-							</div>
-						</div>
-                        
-					{% endif %}
-				{% else %}
-					<p class="text-center">No records found</p>
-				{% endfor %}
+    <h2>Stagiaires</h2>
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+    <div class="row row-cols-3">
+    {% for eleve in eleve %}
+        <div class="col">
+            <div class="rounded bg-light me-1 p-3">
+                <a href="{{ path('app_Lesformation_index', {'id': eleve.id}) }}"><img class="img-fluid " src="{{ asset('uploads/photos/' ~ eleve.photo) }}"></a>
+                <div class="p3">
+                    <h3>{{ eleve.firstname }} {{ eleve.name }}</h3>
+                    <p>{{ eleve.idCursus.cursus }}</p>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>no records found</p>
+    {% endfor %}
+    </div>
+				
 
 </div>
 {% endblock %}
