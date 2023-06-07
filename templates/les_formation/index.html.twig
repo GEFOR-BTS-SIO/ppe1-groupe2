@@ -3,18 +3,38 @@
 {% block title %}Hello LesFormationController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% for eleve in eleves %}
+					{% if eleve != app.user %}
+						<div class="bg-white w-30 h-30 rounded-lg shadow-md p-4 mb-6">
+							<div class="flex items-center mb-4"></div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/yann/Documents/Trombinoscope/src/Controller/LesFormationController.php'|file_link(0) }}">src/Controller/LesFormationController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/yann/Documents/Trombinoscope/templates/les_formation/index.html.twig'|file_link(0) }}">templates/les_formation/index.html.twig</a></code></li>
-    </ul>
+
+							<img src="{{ asset('uploads/photos/' ~ eleve.photo) }}" class="w-10 h-10 object-cover rounded-full border-2 border-indigo-500 " alt="Profile Picture">
+
+							<div class="flex items-center mb-4">
+								<div class="ml-4">
+									<h1 class="text-xl font-bold">{{ eleve.name }}</h1>
+									<h1 class="text-xl font-bold">{{ eleve.firstname }}</h1>
+									
+								</div>
+							</div>
+							{% if is_granted('ROLE_ADMIN') %}
+								<div class="flex justify-center mt-4">
+									<a href="{{ path('app_eleve_crud_edit', {'id': eleve.id}) }}" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Edit</a>
+								</div>
+							{% endif %}
+
+							<div class="flex justify-center mt-4">
+								<a href="{{ path('app_eleve_crud_show', {'id': eleve.id}) }}" class=" bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">Show</a>
+							</div>
+						</div>
+                        
+					{% endif %}
+				{% else %}
+					<p class="text-center">No records found</p>
+				{% endfor %}
+
 </div>
 {% endblock %}

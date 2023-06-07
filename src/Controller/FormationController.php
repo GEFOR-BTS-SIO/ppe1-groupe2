@@ -6,6 +6,7 @@ use App\Entity\Formation;
 use App\Form\FormationType;
 use App\Repository\FormationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -75,4 +76,26 @@ class FormationController extends AbstractController
 
         return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    // #[Route('/searchFormation', name: 'app_formation_search', methods: ['GET'])]
+    // public function search(Request $request, FormationRepository $formationRepository): Response
+    // {
+    //     if (!$this->isGranted('ROLE_USER')) {
+    //         throw new AccessDeniedException('Accès interdit');
+    //     }
+    //     $searchTerm = $request->query->get('e');
+    //     $formation = $formationRepository->search($searchTerm);
+    
+    //     $message = '';
+    //     if (empty($formation)) {
+    //         $message = "Aucun élève trouvé pour la recherche : '$searchTerm'";
+    //     }
+    
+    //     return $this->render('/formation/index.html.twig', [
+    //         'formation' => $formation,
+    //         'searchTerm' => $searchTerm,
+    //         'message' => $message,
+    //     ]);
+    // }
 }

@@ -1,11 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Formation{% endblock %}
+{% block title %}créé nouvelle Formation{% endblock %}
 
 {% block body %}
-    <h1>Create new Formation</h1>
+    
 
-    {{ include('formation/_form.html.twig') }}
+<div class="flex justify-center items-center h-screen">
+    <div class="w-96 bg-sky-900 border border-blue-300 rounded-lg p-6">
+        <h1 class="text-2xl mb-6 text-white">Créé une nouvelle Formation</h1>
+        
+            <!-- Les champs du formulaire ici -->
+            {{ include('formation/_form.html.twig') }}
+            
+        
+        <a href="{{ path('app_eleve_crud_index') }}" class="text-white">retour à la liste</a>
+    </div>
+</div>
 
-    <a href="{{ path('app_formation_index') }}">back to list</a>
 {% endblock %}

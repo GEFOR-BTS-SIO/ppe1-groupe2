@@ -8,40 +8,62 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Constraints\File;
 
 class EleveType extends AbstractType
+
 {
+
+
+    private $authorizationChecker;
+
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    {
+        $this->authorizationChecker = $authorizationChecker;
+    }
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+
+        $isAdmin = $this->authorizationChecker->isGranted('ROLE_ADMIN');
+
         $builder
             ->add('email', null, [
                 'attr' => [
                     'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 ],
-            ])
+            ]);
 
             
-            ->add('roles', ChoiceType::class, [
-                'choices'  => [
-                    'User' => 'ROLE_USER',
-                    'Admin' => 'ROLE_ADMIN',
-                ],
-                'multiple' => true,
-                'expanded' => true,
-                'attr' => [
-                    'class' => 'text-blue-600',
-                ],
-            ])
-            ->add('password', null, [
+            if ($isAdmin) {
+                $builder->add('roles', ChoiceType::class, [
+                    'choices'  => [
+                        'User' => 'ROLE_USER',
+                        'Admin' => 'ROLE_ADMIN',
+                    ],
+                    'multiple' => true,
+                    'expanded' => true,
+                    'attr' => [
+                        'class' => 'text-blue-600',
+                    ],
+                ]);
+            }
+
+            $builder
+            ->add('password', PasswordType::class,  [
                 'attr' => [
                     'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 ],
+                'empty_data' => '',
             ])
             ->add('name', null, [
-                'attr' => [
+                'attr' =>[
                     'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 ],
             ])

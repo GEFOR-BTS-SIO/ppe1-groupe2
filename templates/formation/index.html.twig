@@ -3,32 +3,41 @@
 {% block title %}Formation index{% endblock %}
 
 {% block body %}
-    <h1>Formation index</h1>
+   
+{# <div class="flex flex-wrap justify-center items-center h-screen bg-white space-x-10">
+  {% for formation in formations %}
+    <div class="m-2">
+      <a href="{{ path('app_les_formation') }}" class="bg-orange-600 rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">
+        {{ formation.cursus }}
+      </a>
+    </div>
+  {% endfor %}
+</div> #}
+<div class="p-4">
+  
+  <form action="{{ path('app_eleve_search') }}" class="space-y-4" method="get">
+  {% for formation in formations %}
+    <div>
+      <label for="cursus" class="block font-medium">{{formation.cursus}}</label>
+      <div class="space-y-2">
+        <label for="cursus1" class="inline-flex items-center">
+          <input type="checkbox" id="cursus1" name="cursus[]" value="cursus1" class="form-checkbox h-5 w-5 text-blue-500" />
+        </label>
+      </div>
+      
+    </div>
+{% endfor %}
+ <select id="cursus" name="cursus[]" class="form-select block w-full bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
+            {% for annee in 2020..2040 %}
+              <option value="{{ annee }}">{{ annee }}</option>
+            {% endfor %}
+          </select>
+<div>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Filtrer</button>
+    </div>
+  </form>
+</div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Cursus</th>
-                <th>Annee</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for formation in formations %}
-            <tr>
-                
-                    <a href="{{ path('app_formation_show', {'id': formation.id}) }}">show</a>
-                    <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">edit</a>
-               
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_formation_new') }}">Create new</a>
+
 {% endblock %}

@@ -45,6 +45,17 @@ class EleveCrudController extends AbstractController
        
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $plainPassword = $form->get('password')->getData();
+
+            // Vérifier si un nouveau mot de passe a été saisi
+            if (!empty($plainPassword)) {
+                // Hacher le mot de passe
+                $hashedPassword = $this->hashPassword($plainPassword);
+
+                // Définir le mot de passe haché dans l'entité Eleve
+                $eleve->setPassword($hashedPassword);
+            }
             
             $photo = $form->get('photo')->getData();
             if ($photo) {
@@ -83,7 +94,7 @@ class EleveCrudController extends AbstractController
         if (!$this->isGranted('ROLE_USER')) {
             throw new AccessDeniedException('Accès interdit');
         }
-        $searchTerm = $request->query->get('e');
+        $searchTerm = $request->query->get('b');
         $eleves = $eleveRepository->search($searchTerm);
     
         $message = '';

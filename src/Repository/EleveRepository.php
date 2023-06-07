@@ -63,7 +63,6 @@ class EleveRepository extends ServiceEntityRepository implements PasswordUpgrade
         $qb = $this->createQueryBuilder('b')
         ->where('b.name LIKE :searchTerm')
         ->orWhere('b.firstname LIKE :searchTerm')
-        ->orWhere('b.formation LIKE :searchTerm')
         ->setParameter('searchTerm', '%'.$searchTerm.'%')
         ->getQuery();
 

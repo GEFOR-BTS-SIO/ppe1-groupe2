@@ -38,6 +38,17 @@ class FormationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function search($searchTerm)
+    {
+        $qb = $this->createQueryBuilder('q')
+        ->where('b.cursus LIKE :searchTerm')
+        ->orWhere('b.annee LIKE :searchTerm')
+        ->setParameter('searchTerm', '%'.$searchTerm.'%')
+        ->getQuery();
+
+    return $qb->execute();
+            
+    }
 
 //    /**
 //     * @return Formation[] Returns an array of Formation objects
