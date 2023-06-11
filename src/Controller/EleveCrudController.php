@@ -80,7 +80,7 @@ class EleveCrudController extends AbstractController
 
             return $this->redirectToRoute('app_eleve_crud_index', [], Response::HTTP_SEE_OTHER);
         }
-        dump($eleve) ;
+        
 
         return $this->render('eleve_crud/new.html.twig', [
             'eleve' => $eleve,
