@@ -6,6 +6,7 @@ use App\Entity\Formation;
 use App\Form\FormationType;
 use App\Repository\EleveRepository;
 use App\Repository\FormationRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 #[Route('/formation')]
+#[IsGranted('ROLE_ADMIN')]
 class FormationController extends AbstractController
 {
     #[Route('/', name: 'app_formation_index', methods: ['GET'])]

@@ -123,7 +123,7 @@ class EleveCrudController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_eleve_crud_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_ADMIN')]
+    
     public function edit(Request $request,SluggerInterface $slugger, Eleve $eleve, EleveRepository $eleveRepository): Response
     {
 
