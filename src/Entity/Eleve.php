@@ -44,6 +44,9 @@ class Eleve implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'eleves')]
     private ?Formation $idCursus = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Marital = null;
+
    
 
     public function getId(): ?int
@@ -168,6 +171,18 @@ class Eleve implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIdCursus(?Formation $idCursus): self
     {
         $this->idCursus = $idCursus;
+
+        return $this;
+    }
+
+    public function getMarital(): ?string
+    {
+        return $this->Marital;
+    }
+
+    public function setMarital(?string $Marital): self
+    {
+        $this->Marital = $Marital;
 
         return $this;
     }

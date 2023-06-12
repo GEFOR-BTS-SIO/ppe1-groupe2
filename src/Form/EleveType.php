@@ -72,6 +72,12 @@ class EleveType extends AbstractType
                     'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 ],
             ])
+
+            ->add('marital', null, [
+                'attr' => [
+                    'class' => 'bg-blue-50 border border-blue-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                ],
+            ])
             ->add('idCursus', EntityType::class, [
                 'class' => Formation::class,
                 'choice_label' => 'cursus',
