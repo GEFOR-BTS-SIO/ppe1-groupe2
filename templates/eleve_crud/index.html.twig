@@ -7,7 +7,7 @@
 
 
 	<div class="grid grid-cols-2 md:grid-cols-3 gap-4 bg-white">
-		<div class="grid grid-cols-4 gap-6">
+		
 
 			{% for eleve in eleves %}
 
@@ -22,7 +22,6 @@
 									<a class="text-xs text-white italic hover:underline hover:text-indigo-600 font-medium" href="{{ path('app_eleve_crud_edit', {'id': app.user.id}) }}">Modifier le profil</a>
 								{% endif %}
 
-								<div class="flex mt-4 space-x-3 md:mt-6"></div>
 							</div>
 						</div>
 
@@ -32,7 +31,7 @@
 				{% else %}
 					<p class="text-center">No records found</p>
 				{% endfor %}
-			</div>
+			
 		</div>
 
 
