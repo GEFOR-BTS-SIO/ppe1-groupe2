@@ -18,14 +18,14 @@
 							<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="{{ asset('uploads/photos/' ~ eleve.photo) }}" alt="Profile Picture"/>
 							<h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ eleve.name }}</h5>
 							<span class="text-sm text-gray-500 dark:text-gray-400">{{ eleve.firstname }}</span>
-                            {% if app.user.marital is empty %}
+                            {% if eleve.marital is empty %}
 								<span class="text-sm text-gray-500 dark:text-gray-400">{{ eleve.marital }}</span>
 							{% else %}
 								<span class="text-sm text-gray-500 dark:text-gray-400">{{ eleve.marital }}</span>
 							{% endif %}
 							<div class="text-center my-3">
 								{% if is_granted('ROLE_ADMIN') %}
-									<a class="text-xs text-white italic hover:underline hover:text-indigo-600 font-medium" href="{{ path('app_eleve_crud_edit', {'id': app.user.id}) }}">Modifier le profil</a>
+									<a class="text-xs text-white italic hover:underline hover:text-indigo-600 font-medium" href="{{ path('app_eleve_crud_edit', {'id': eleve.id}) }}">Modifier le profil</a>
 								{% endif %}
 
 
