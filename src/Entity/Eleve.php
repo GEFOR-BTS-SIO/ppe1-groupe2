@@ -47,6 +47,12 @@ class Eleve implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Marital = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $password2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $passeword3 = null;
+
    
 
     public function getId(): ?int
@@ -183,6 +189,30 @@ class Eleve implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMarital(?string $Marital): self
     {
         $this->Marital = $Marital;
+
+        return $this;
+    }
+
+    public function getPassword2(): ?string
+    {
+        return $this->password2;
+    }
+
+    public function setPassword2(?string $password2): self
+    {
+        $this->password2 = $password2;
+
+        return $this;
+    }
+
+    public function getPasseword3(): ?string
+    {
+        return $this->passeword3;
+    }
+
+    public function setPasseword3(?string $passeword3): self
+    {
+        $this->passeword3 = $passeword3;
 
         return $this;
     }
